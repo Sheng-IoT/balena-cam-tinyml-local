@@ -3,8 +3,8 @@
 # API Key and Project ID are defined as environment variables in BalenaCloud
 
 # Fill out and uncomment for local deployment
-#EI_API_KEY=""
-#EI_PROJECT_ID=""
+EI_API_KEY="ei_51df5610b911381b4a561ea2ff205254e457ab299c64d2ddf595a8516757a414"
+EI_PROJECT_ID="121792"
 
 # Build WASM model and retrieves JOB ID
 JOB_ID=`curl --request POST \

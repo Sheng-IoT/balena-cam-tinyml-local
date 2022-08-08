@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import asyncio, json, os, cv2, platform, sys
 from websocket import create_connection
 import base64
@@ -9,7 +11,8 @@ from aiohttp_basicauth import BasicAuthMiddleware
 
 class CameraDevice():
     def __init__(self):
-        self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture("./test.h264")
+        #self.cap = cv2.VideoCapture(1)
         ret, frame = self.cap.read()
         if not ret:
             print('Failed to open default camera. Exiting...')
@@ -248,7 +251,8 @@ if __name__ == '__main__':
     pc_factory = PeerConnectionFactory()
 
     # Connect to websocket server for image classification
-    ws = create_connection("ws://edgeimpulse-inference:8080")
+    #ws = create_connection("ws://edgeimpulse-inference:8080")
+    ws = create_connection("ws://localhost:8080")
 
     app = web.Application(middlewares=auth)
     app.on_shutdown.append(on_shutdown)
@@ -263,4 +267,4 @@ if __name__ == '__main__':
     app.router.add_get('/mjpeg', mjpeg_handler)
     app.router.add_get('/ice-config', config)
     app.router.add_get('/classification', classification)
-    web.run_app(app, port=80)
+    web.run_app(app, port=5000)

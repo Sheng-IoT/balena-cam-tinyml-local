@@ -1,15 +1,29 @@
 version: '2'
 services:
-        edgeimpulse-inference:
-                build: ./edgeimpulse-inference
-                restart: always 
-        balena-cam:
-                build: ./balena-cam
-                privileged: true
-                restart: always
-                depends_on:
-                        - edgeimpulse-inference
-                ports:
-                        - "80"
-                labels:
-                        io.balena.features.kernel-modules: '1'
+
+  edgeimpulse-inference:
+    build:
+      context: ./edgeimpulse-inference
+      dockerfile: Dockerfile.aarch64
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    environment:
+      EI_API_KEY: ei_51df5610b911381b4a561ea2ff205254e457ab299c64d2ddf595a8516757a414
+      EI_PROJECT_ID: 121792
+
+                 
+#  balena-cam:
+#    build: 
+#      context: ./balena-cam
+#      dockerfile: Dockerfile.aarch64
+#    privileged: true
+#    restart: unless-stopped
+#    depends_on:
+#        - edgeimpulse-inference
+#    ports:
+#        - "5000"
+#    labels:
+#        io.balena.features.kernel-modules: '1'
+
+

@@ -1,5 +1,5 @@
 // Load the inferencing WebAssembly module
-const Module = require('./edge-impulse-standalone');
+const Module = require('./node/edge-impulse-standalone');
 // sharp module to retrieve image pixels information
 const sharp = require('sharp');
 const WebSocket = require('ws');
